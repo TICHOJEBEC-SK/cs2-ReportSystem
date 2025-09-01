@@ -1,0 +1,11 @@
+﻿{
+  "MenuNotReady": "{lightred}Menu nie je pripravené.",
+  "MenuNoPlayers": "{lightred}Žiadni dostupní hráči.",
+  "MenuPlayerInvalid": "{lightred}Hráč už nie je online.",
+  "MenuTitleSelectPlayer": "Vyber hráča na nahlásenie",
+  "MenuTitleSelectReason": "Vyber dôvod nahlásenia",
+  "SelfReportBlocked": "{lightred}Nemôžeš nahlásiť sám seba.",
+  "CooldownActive": "{lightyellow}Počkaj prosím, používaš report príliš často. Cooldown {0}s.",
+  "ReportSent": "{green}Report odoslaný: {white}{0}{green} ({white}{1}{green}). Ďakujeme.",
+  "ReportNotifyAdmins": "{orange}Nový report: {white}{0}{orange} → {white}{1}{orange}, dôvod: {white}{2}"
+}
