@@ -24,6 +24,7 @@ public class ReportConfig : BasePluginConfig
     [JsonPropertyName("ChatPrefix")] public string ChatPrefix { get; set; } = " {lightred}[REPORT]";
     [JsonPropertyName("ReportCommand")] public string ReportCommand { get; set; } = "css_report";
     [JsonPropertyName("Database")] public DatabaseConfig Database { get; set; } = new();
+    [JsonPropertyName("ServerName")] public string ServerName { get; set; } = "MIRAGE";
 
     [JsonPropertyName("NotifyAdminsPermission")]
     public string NotifyAdminsPermission { get; set; } = "@css/kick";

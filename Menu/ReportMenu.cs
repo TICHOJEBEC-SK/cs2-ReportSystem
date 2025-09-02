@@ -30,7 +30,7 @@ public static class ReportMenu
         }
 
         var menu = api.GetMenu(title);
-        
+
         menu.PostSelectAction = PostSelectAction.Reset;
 
         foreach (var p in list)
@@ -56,7 +56,7 @@ public static class ReportMenu
         Action<string> onSelect)
     {
         var menu = api.GetMenu(title);
-        
+
         menu.PostSelectAction = PostSelectAction.Close;
         menu.ExitButton = true;
 
@@ -66,7 +66,7 @@ public static class ReportMenu
             menu.AddMenuOption(reason, (_, __) =>
             {
                 onSelect(reason);
-                
+
                 CounterStrikeSharp.API.Modules.Menu.MenuManager.CloseActiveMenu(caller);
             });
         }

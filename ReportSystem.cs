@@ -33,6 +33,7 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
         if (string.IsNullOrWhiteSpace(config.Language)) config.Language = "sk";
         if (string.IsNullOrWhiteSpace(config.ChatPrefix)) config.ChatPrefix = " [REPORT]";
         if (string.IsNullOrWhiteSpace(config.ReportCommand)) config.ReportCommand = "css_report";
+        if (string.IsNullOrWhiteSpace(config.ServerName)) config.ServerName = "CS2";
         if (config.CooldownSeconds < 0) config.CooldownSeconds = 0;
         if (config.Reasons.Count == 0)
             config.Reasons = new() { "Cheating", "Toxic", "Voice spam" };
@@ -47,6 +48,7 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
 
         _db = new Database(Config.Database.ToConnectionString());
         _db.InitAsync().GetAwaiter().GetResult();
+
         _repo = new ReportRepository(_db);
         _service = new ReportService(_repo, Config);
 
@@ -60,7 +62,7 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
             Console.WriteLine("[ReportSystem] MenuManager Core not found (menu:nfcore)");
     }
 
-    private string Pref(string s) => $"{Config.ChatPrefix} {s}";
+    private string Pref(string s) => $"{Config.ChatPrefix.TrimEnd()} {s}";
 
     private void OnReportCommand(CCSPlayerController? caller, CommandInfo info)
     {
@@ -72,7 +74,7 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
             Chat.ToPlayer(player, Pref(_l["MenuNotReady"]));
             return;
         }
-        
+
         if (!_service.CanReport(player.SteamID))
         {
             Chat.ToPlayer(player, Pref(_l["CooldownActive"]), Config.CooldownSeconds);
@@ -106,9 +108,9 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
                     reason =>
                     {
                         _service.CreateAsync(player, target, reason).GetAwaiter().GetResult();
-                        
+
                         Chat.ToPlayer(player, Pref(_l["ReportSent"]), Chat.Name(target), reason);
-                        
+
                         if (!string.IsNullOrWhiteSpace(Config.NotifyAdminsPermission))
                         {
                             foreach (var p in Utilities.GetPlayers())
