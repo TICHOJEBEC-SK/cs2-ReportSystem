@@ -34,7 +34,7 @@ public class ReportService
 
     public async Task CreateAsync(CCSPlayerController caller, CCSPlayerController target, string reason)
     {
-        var now = DateTime.UtcNow;
+        var now = DateTime.Now;
 
         var rec = new ReportRecord
         {
@@ -51,4 +51,5 @@ public class ReportService
 
         await _repo.InsertAsync(rec);
     }
+
 }
