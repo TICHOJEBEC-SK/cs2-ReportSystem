@@ -16,7 +16,7 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
     public override string ModuleName => "ReportSystem";
     public override string ModuleVersion => "1.0";
     public override string ModuleAuthor => "TICHOJEBEC";
-    public override string ModuleDescription => "Report System";
+    public override string ModuleDescription => "https://github.com/TICHOJEBEC-SK/cs2-ReportSystem";
 
     private readonly PluginCapability<IMenuApi?> _menuCapability = new("menu:nfcore");
     private IMenuApi? _menuApi;
@@ -34,9 +34,10 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
         if (string.IsNullOrWhiteSpace(config.ChatPrefix)) config.ChatPrefix = " [REPORT]";
         if (string.IsNullOrWhiteSpace(config.ReportCommand)) config.ReportCommand = "css_report";
         if (string.IsNullOrWhiteSpace(config.ServerName)) config.ServerName = "CS2";
+        if (string.IsNullOrWhiteSpace(config.ServerAddress)) config.ServerAddress = "127.0.0.1:27015";
         if (config.CooldownSeconds < 0) config.CooldownSeconds = 0;
         if (config.Reasons.Count == 0)
-            config.Reasons = new() { "Cheating", "Toxic", "Voice spam" };
+            config.Reasons = new() { "Cheating", "Toxic", "Voice spam", "Exploit" };
 
         Config = config;
     }
@@ -83,7 +84,6 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
 
         var players = Utilities.GetPlayers()
             .Where(p => p is { IsValid: true } && !p.IsBot && !p.IsHLTV)
-            .Where(p => p.UserId != player.UserId)
             .OrderBy(p => p.PlayerName)
             .ToList();
 

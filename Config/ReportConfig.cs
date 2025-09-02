@@ -25,6 +25,7 @@ public class ReportConfig : BasePluginConfig
     [JsonPropertyName("ReportCommand")] public string ReportCommand { get; set; } = "css_report";
     [JsonPropertyName("Database")] public DatabaseConfig Database { get; set; } = new();
     [JsonPropertyName("ServerName")] public string ServerName { get; set; } = "MIRAGE";
+    [JsonPropertyName("ServerAddress")] public string ServerAddress { get; set; } = "127.0.0.1:27015";
 
     [JsonPropertyName("NotifyAdminsPermission")]
     public string NotifyAdminsPermission { get; set; } = "@css/kick";

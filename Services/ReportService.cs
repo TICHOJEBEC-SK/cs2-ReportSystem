@@ -21,7 +21,7 @@ public class ReportService
     {
         if (_cfg.CooldownSeconds <= 0) return true;
 
-        var now = DateTime.UtcNow; // UTC kvôli konzistencii s botom
+        var now = DateTime.UtcNow;
         if (_cooldowns.TryGetValue(callerSteamId64, out var last))
         {
             var next = last.AddSeconds(_cfg.CooldownSeconds);
@@ -39,6 +39,8 @@ public class ReportService
         var rec = new ReportRecord
         {
             ServerName = _cfg.ServerName,
+            ServerAddress = _cfg.ServerAddress,
+
             CallerSteamId64 = caller.SteamID,
             CallerNickname = Chat.Name(caller),
             TargetSteamId64 = target.SteamID,
@@ -51,5 +53,4 @@ public class ReportService
 
         await _repo.InsertAsync(rec);
     }
-
 }
