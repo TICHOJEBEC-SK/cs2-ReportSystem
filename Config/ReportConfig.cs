@@ -35,7 +35,8 @@ public class ReportConfig : BasePluginConfig
     {
         "Cheating",
         "Toxic",
-        "Voice spam"
+        "Voice spam",
+        "Exploit"
     };
 
     [JsonPropertyName("CooldownSeconds")] public int CooldownSeconds { get; set; } = 30;

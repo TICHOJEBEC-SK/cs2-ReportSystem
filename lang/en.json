@@ -7,5 +7,6 @@
   "SelfReportBlocked": "{lightred}Nemôžeš nahlásiť sám seba.",
   "CooldownActive": "{lightyellow}Počkaj prosím, používaš report príliš často. Cooldown {0}s.",
   "ReportSent": "{green}Report odoslaný: {white}{0}{green} ({white}{1}{green}). Ďakujeme.",
-  "ReportNotifyAdmins": "{orange}Nový report: {white}{0}{orange} → {white}{1}{orange}, dôvod: {white}{2}"
+  "ReportNotifyAdmins": "{orange}Nový report: {white}{0}{orange} → {white}{1}{orange}, dôvod: {white}{2}",
+  "TargetAlreadyReported": "{lightred}Hráč je už nahlásený iným hráčom a report je v riešení."
 }

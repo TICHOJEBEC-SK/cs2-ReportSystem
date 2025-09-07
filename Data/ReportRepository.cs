@@ -37,4 +37,18 @@ SELECT LAST_INSERT_ID();";
         var id = await con.ExecuteScalarAsync<int>(q, rec);
         return id;
     }
+    
+    public async Task<bool> HasUnresolvedByTargetAsync(ulong targetSteamId64)
+    {
+        await using var con = _db.Open();
+        const string q = @"
+SELECT EXISTS(
+  SELECT 1
+  FROM report_system_reports
+  WHERE target_steamid64 = @TargetSteamId64
+    AND status <> 'resolved'
+) AS has_open;";
+        var has = await con.ExecuteScalarAsync<bool>(q, new { TargetSteamId64 = targetSteamId64 });
+        return has;
+    }
 }

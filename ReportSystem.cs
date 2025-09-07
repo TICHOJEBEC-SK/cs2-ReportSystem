@@ -99,6 +99,16 @@ public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
                     Chat.ToPlayer(player, Pref(_l["SelfReportBlocked"]));
                     return;
                 }
+                
+                var isAlreadyReported = _service
+                    .IsTargetAlreadyReportedAsync(target.SteamID)
+                    .GetAwaiter().GetResult();
+
+                if (isAlreadyReported)
+                {
+                    Chat.ToPlayer(player, Pref(_l["TargetAlreadyReported"]));
+                    return;
+                }
 
                 ReportMenu.OpenReasons(
                     _menuApi,
