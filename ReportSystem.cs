@@ -14,7 +14,7 @@ namespace ReportSystem;
 public class ReportSystem : BasePlugin, IPluginConfig<ReportConfig>
 {
     public override string ModuleName => "ReportSystem";
-    public override string ModuleVersion => "1.0";
+    public override string ModuleVersion => "1.1";
     public override string ModuleAuthor => "TICHOJEBEC";
     public override string ModuleDescription => "https://github.com/TICHOJEBEC-SK/cs2-ReportSystem";
 
