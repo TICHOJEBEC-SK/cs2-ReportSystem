@@ -38,17 +38,22 @@ SELECT LAST_INSERT_ID();";
         return id;
     }
     
-    public async Task<bool> HasUnresolvedByTargetAsync(ulong targetSteamId64)
+    public async Task<bool> HasUnresolvedByCallerAndTargetAsync(ulong callerSteamId64, ulong targetSteamId64)
     {
         await using var con = _db.Open();
         const string q = @"
 SELECT EXISTS(
   SELECT 1
   FROM report_system_reports
-  WHERE target_steamid64 = @TargetSteamId64
-    AND status <> 'resolved'
+  WHERE caller_steamid64 = @CallerSteamId64
+    AND target_steamid64 = @TargetSteamId64
+    AND status IN ('new','claimed')
 ) AS has_open;";
-        var has = await con.ExecuteScalarAsync<bool>(q, new { TargetSteamId64 = targetSteamId64 });
+        var has = await con.ExecuteScalarAsync<bool>(q, new
+        {
+            CallerSteamId64 = callerSteamId64,
+            TargetSteamId64 = targetSteamId64
+        });
         return has;
     }
 }

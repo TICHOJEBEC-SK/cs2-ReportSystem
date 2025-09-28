@@ -31,9 +31,9 @@ public class ReportService
         _cooldowns[callerSteamId64] = now;
         return true;
     }
-    
-    public Task<bool> IsTargetAlreadyReportedAsync(ulong targetSteamId64)
-        => _repo.HasUnresolvedByTargetAsync(targetSteamId64);
+
+    public Task<bool> IsTargetAlreadyReportedAsync(ulong callerSteamId64, ulong targetSteamId64)
+        => _repo.HasUnresolvedByCallerAndTargetAsync(callerSteamId64, targetSteamId64);
 
     public async Task CreateAsync(CCSPlayerController caller, CCSPlayerController target, string reason)
     {
